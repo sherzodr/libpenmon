@@ -12,7 +12,6 @@
 const bool CHECK_RADIATION_RANGE = true;
 const bool CHECK_SUNSHINE_HOURS_RANGE=true;
 
-
 #include <math.h>
 
 // forward declarations
@@ -94,7 +93,7 @@ public:
 	float atmospheric_pressure(void);
 	float atmospheric_pressure_in_mm(void);
 	float latent_heat_of_vapourization(void);
-	float specific_heat(void);
+	double specific_heat(void);
 	float psychrometric_constant(void);
 	float Tmean(void);
 	float saturation_vapour_pressure(float);

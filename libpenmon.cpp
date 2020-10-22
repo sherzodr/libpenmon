@@ -3,7 +3,7 @@
 // Author      : Sherzod RUZMETOV
 // Version     :
 // Copyright   : 2020 Sherzod RUZMETOV
-// Description : Implements Station, Day, Climate and Crop classes according to
+// Description : Implements Weather Station that calculates ETo using
 //               Penman-Monteith equation
 //============================================================================
 
@@ -159,7 +159,7 @@ float StationDay::latent_heat_of_vapourization() {
 	return 2.45;
 }
 
-float StationDay::specific_heat() {
+double StationDay::specific_heat() {
 	return 1.013 * pow(10, -3);
 }
 
