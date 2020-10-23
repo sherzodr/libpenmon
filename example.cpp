@@ -22,10 +22,12 @@ void testEq(float a, float b, string message) {
 	sprintf(b_str, "%.3f", b);
 
 	if (strcmp(a_str, b_str) == 0) {
-		cout << message << "... \e[1;92mPASSED\e[0m";
+		//cout << message << "... \e[1;92mPASSED\e[0m";
+		cout << message << "... PASSED";
 	} else {
-		cout << message << "... \e[1;31mNOT PASSED. Expected " << b_str
-				<< ". Received  " << a_str << "\e[0m";
+		//cout << message << "... \e[1;31mNOT PASSED. Expected " << b_str << ". Received  " << a_str << "\e[0m";
+		cout << message << "... NOT PASSED. Expected " << b_str
+				<< ". Received  " << a_str;
 	}
 	cout << "\n";
 }
@@ -86,7 +88,7 @@ int main(void) {
 	station.altitude = 1200;
 	day.temp_wet = 19.5;
 	day.temp_dry = 25.6;
-	testEq(day.atmospheric_pressure(), 87.9, "atmospheric pressure");
+	testEq(day.atmospheric_pressure(), 87.897, "atmospheric pressure");
 	testEq(day.saturation_vapour_pressure(19.5), 2.267,
 			"saturation vapour pressure");
 	testTrue(day.temp_dew != true, "Temp dew temperature is NOT set");
@@ -146,12 +148,45 @@ int main(void) {
 
 	StationDay day_246 = station.get_day(246);
 	testEq(day_246.relative_sun_distance(), 0.985, "relative sun distance");
-
 	testEq(day_246.solar_declination(), 0.120, "solar declination");
 
 	Station south_station(-20.0, 1200);
 	StationDay south_day = south_station.get_day(246);
+
 	testEq(south_day.sunset_hour_angle(), 1.527, "sunset hour angle");
+	testEq(south_day.R_a(), 32.194, "R_a");
+	testEq(south_day.R_a_in_mm(), 13.135, "R_a_in_mm");
+	testEq(south_day.daylight_hours(), 11.666, "daylight hours");
+
+	Station south_station2(-22.90, 1200);
+	StationDay day135 = south_station2.get_day(135);
+	day135.sunshine_hours = 7.10;
+	testEq(day135.solar_radiation(), 14.46, "solar radiation");
+	testEq(day135.R_so(), 18.833, "clear sky radiation");
+
+	testEq(day135.R_ns(), 11.134, "net shortwave radiation");
+
+	day135.temp_min=25.1;
+	day135.temp_max=19.1;
+	day135.vapour_pressure=2.1;
+	testEq(day135.actual_vapour_pressure(), 2.1, "actual vapour pressure");
+	day135.sunshine_hours=7.1;
+	testEq(day135.R_nl(), 3.51, "Net longwave raditaion");
+	testEq(day135.net_radiation(), 7.624, "net radiation");
+
+	day135.wind_speed=5;
+	testEq(day135.wind_speed_2m(), 5, "wind speed" );
+
+	day135.station->anemometer_height=10;
+	day135.wind_speed=3.2;
+	testEq(day135.wind_speed_2m(), 2.393, "wind_speed");
+
+	Station qarmish(41.42, 109);
+	StationDay day150 = qarmish.get_day(150);
+	day150.temp_min = 19.5;
+	day150.temp_max = 36.50;
+	day150.wind_speed = 2;
+	testEq(day150.eto(), 6.98, "eto()");
 
 	return 0;
 }

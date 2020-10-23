@@ -82,7 +82,7 @@ public:
 	float wind_speed { }, radiation_s { }, radiation_a { }, temp_dew { },
 			temp_dry { }, temp_wet { };
 	float vapour_pressure { }, sunshine_hours {-1 };
-	const float stephen_boltzmann_constant = pow(4.903 * 10, -9.0);
+	const float stephen_boltzmann_constant = 4.903 * pow(10, -9);
 
 	Station* station;
 

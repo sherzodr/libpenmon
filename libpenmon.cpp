@@ -268,12 +268,14 @@ float StationDay::sunset_hour_angle() {
 }
 
 float StationDay::R_a() {
-	return (24 * 60 / M_PI * 0.0820 * this->relative_sun_distance()
-			* this->sunset_hour_angle() * sin(this->station->latitude_radians)
-			* sin(this->solar_declination()))
-			+ (cos(this->station->latitude_radians)
-					* cos(this->solar_declination())
-					* sin(this->sunset_hour_angle()));
+
+	float lat = this->station->latitude_radians;
+	float decl = this->solar_declination();
+	float angle = this->sunset_hour_angle();
+	double P = (angle * sin(lat) * sin(decl))
+			+ (cos(lat) * cos(decl) * sin(angle));
+
+	return (24 * 60 / M_PI) * 0.0820 * this->relative_sun_distance() * P;
 }
 
 float StationDay::R_a_in_mm() {
@@ -343,7 +345,7 @@ float StationDay::R_nl() {
 	float rso = this->R_so();
 	float sbc = this->stephen_boltzmann_constant;
 
-	return ((pow(TmaxK, 4) + pow(TminK, 4)) / 2) * (0.34 - (0.14 * sqrt(ea)))
+	return sbc * ((pow(TmaxK, 4) + pow(TminK, 4)) / 2) * (0.34 - (0.14 * sqrt(ea)))
 			* ((1.35 * (rs / rso)) - 0.35);
 }
 
@@ -398,7 +400,7 @@ float StationDay::eto() {
 	float G = this->soil_heat_flux();
 	float u2m = this->wind_speed_2m();
 
-	cout << "Net radiation is " << net_radiation << endl;
+	//cout << "Net radiation is " << net_radiation << endl;
 
 	float nominator = (0.408 * slope * (net_radiation - G))
 			+ (this->psychrometric_constant() * (900 / (Tmean + 273)) * u2m
