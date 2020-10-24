@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configurations>
-<configuration id="org.eclipse.linuxtools.cdt.autotools.core.configuration.build.1546251684">
+<configuration id="org.eclipse.linuxtools.cdt.autotools.core.configuration.build.1328695359">
 <option id="configure" value="configure"/>
 <option id="configdir" value=""/>
 <option id="cache-file" value=""/>
@@ -40,7 +40,7 @@
 <option id="autogen" value="autogen.sh"/>
 <option id="autogenOpts" value=""/>
 </configuration>
-<configuration id="org.eclipse.linuxtools.cdt.autotools.core.configuration.build.debug.457567067">
+<configuration id="org.eclipse.linuxtools.cdt.autotools.core.configuration.build.debug.1463505406">
 <option id="configure" value="configure"/>
 <option id="configdir" value=""/>
 <option id="cache-file" value=""/>

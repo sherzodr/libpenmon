@@ -6,7 +6,6 @@
 
 #include <iostream>
 #include "libpenmon.h"
-#include <assert.h>
 #include <string>
 #include <stdio.h>
 #include <string.h>
@@ -22,12 +21,12 @@ void testEq(float a, float b, string message) {
 	sprintf(b_str, "%.3f", b);
 
 	if (strcmp(a_str, b_str) == 0) {
-		//cout << message << "... \e[1;92mPASSED\e[0m";
-		cout << message << "... PASSED";
+		cout << message << "... \e[1;92mPASSED\e[0m";
+		//cout << message << "... PASSED";
 	} else {
-		//cout << message << "... \e[1;31mNOT PASSED. Expected " << b_str << ". Received  " << a_str << "\e[0m";
-		cout << message << "... NOT PASSED. Expected " << b_str
-				<< ". Received  " << a_str;
+		cout << message << "... \e[1;31mNOT PASSED. Expected " << b_str << ". Received  " << a_str << "\e[0m";
+		//cout << message << "... NOT PASSED. Expected " << b_str
+		//		<< ". Received  " << a_str;
 	}
 	cout << "\n";
 }
