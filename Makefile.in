@@ -700,10 +700,6 @@ example: example.cpp
 
 example.cpp: all
 
-realclean: clean
-	-rm config.* aclocal.m4 example.exe Makefile libtool .Makefile*
-	-rm -rf autom4te.cache .deps
-
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

@@ -8,7 +8,3 @@ example: example.cpp
 	$(CXX) -oexample -L".libs/" -I. example.cpp -lpenmon	
 
 example.cpp: all
-
-realclean: clean
-	-rm config.* aclocal.m4 example.exe Makefile libtool .Makefile*
-	-rm -rf autom4te.cache .deps
