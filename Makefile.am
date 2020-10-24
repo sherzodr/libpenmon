@@ -9,5 +9,6 @@ example: example.cpp
 
 example.cpp: all
 
-clean-am:
-	-rm -f example$(EXEEXT) *~
+realclean: clean
+	-rm config.* aclocal.m4 example.exe Makefile libtool .Makefile*
+	-rm -rf autom4te.cache .deps
